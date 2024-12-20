@@ -269,7 +269,7 @@ FUNC(opt_val_hash, blake2b_new_general, ARG(uint, hashlen))
  * to ssh2_mac_new. Also, again, I've invented an ssh2_mac_update so
  * you can put data into the MAC.
  */
-FUNC(val_mac, ssh2_mac_new, ARG(macalg, alg), ARG(opt_val_cipher, cipher))
+FUNC(opt_val_mac, ssh2_mac_new, ARG(macalg, alg), ARG(opt_val_cipher, cipher))
 FUNC(void, ssh2_mac_setkey, ARG(val_mac, m), ARG(val_string_ptrlen, key))
 FUNC(void, ssh2_mac_start, ARG(val_mac, m))
 FUNC(void, ssh2_mac_update, ARG(val_mac, m), ARG(val_string_ptrlen, data))
@@ -326,6 +326,12 @@ FUNC(opt_val_string, key_components_nth_str,
      ARG(val_keycomponents, kc), ARG(uint, n))
 FUNC(opt_val_mpint, key_components_nth_mp, ARG(val_keycomponents, kc),
      ARG(uint, n))
+
+/*
+ * DSA nonce generation.
+ */
+FUNC(opt_val_mpint, rfc6979, ARG(hashalg, hash), ARG(val_mpint, modulus),
+     ARG(val_mpint, private_key), ARG(val_string_ptrlen, message))
 
 /*
  * The ssh_cipher abstraction. The in-place encrypt and decrypt
